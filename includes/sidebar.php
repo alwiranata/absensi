@@ -19,7 +19,10 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : 'beranda';
         <!-- Menu Absensi -->
         <a href="dashboard.php?page=absensi">
             <div class="flex flex-row mt-6 items-center w-[200px] h-[50px] gap-3 p-3 rounded-[15px] cursor-pointer
-                <?php echo ($current_page == 'absensi') ? 'bg-[#E99724] text-white' : 'hover:bg-gray-200'; ?>">
+        <?php echo ($current_page == 'absensi' || $current_page == 'detail' || $current_page == "edit" || $current_page == "add")
+            ? 'bg-[#E99724] text-white'
+            : 'hover:bg-gray-200'; ?>">
+
                 <img class="w-[30px] h-[30px] rounded-full" src="assets/img/absensi.jpg" alt="">
                 <p>Absensi</p>
             </div>
@@ -28,7 +31,7 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : 'beranda';
         <!-- Menu Profile -->
         <a href="dashboard.php?page=profile">
             <div class="flex flex-row mt-6 items-center w-[200px] h-[50px] gap-3 p-3 rounded-[15px] cursor-pointer
-                <?php echo ($current_page == 'profile') ? 'bg-[#E99724] text-white' : 'hover:bg-gray-200'; ?>">
+                <?php echo ($current_page == 'profile' || $current_page == 'add_user') ? 'bg-[#E99724] text-white' : 'hover:bg-gray-200'; ?>">
                 <img class="w-[30px] h-[30px] rounded-full" src="assets/img/profile.jpg" alt="">
                 <p>Profile</p>
             </div>

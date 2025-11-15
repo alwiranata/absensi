@@ -19,4 +19,3 @@ $dataAdmin = $qAdmin->fetch_assoc();
         <p class="text-[16px]"><?php echo $dataAdmin['total_admin']; ?> Admin</p>
     </div>
 </div>
-
