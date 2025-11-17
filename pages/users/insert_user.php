@@ -33,13 +33,13 @@ if (isset($_POST['id_user'], $_POST['nama'], $_POST['username'], $_POST['passwor
     $check_username->execute();
     $check_username->store_result();
 
-    if ($check_username->num_rows > 0) {
-        echo "<script>
-            alert('Username $username sudah digunakan! Silakan pilih username lain.');
-            window.history.back();
-        </script>";
-        exit;
-    }
+    // if ($check_username->num_rows > ) {
+    //     echo "<script>
+    //         alert('Username $username sudah digunakan! Silakan pilih username lain.');
+    //         window.history.back();
+    //     </script>";
+    //     exit;
+    // }
 
     // ============================
     // INSERT DATA USER
@@ -50,7 +50,7 @@ if (isset($_POST['id_user'], $_POST['nama'], $_POST['username'], $_POST['passwor
     if ($stmt->execute()) {
         echo "<script>
             alert('User berhasil ditambahkan');
-            window.location='../../dashboard.php?page=profile';
+            window.location='../../dashboard.php?page=add_user';
         </script>";
     } else {
         echo "Gagal menambahkan user: " . $stmt->error;

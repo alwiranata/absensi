@@ -1,9 +1,4 @@
 <?php
-require __DIR__ . '/../../vendor/autoload.php'; // pastikan sudah install PhpSpreadsheet via composer
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 include __DIR__ . '/../../config/db.php';
 
 $id_user = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -15,15 +10,28 @@ if ($id_user <= 0) {
 $user = $conn->query("SELECT nama FROM users WHERE id_user = $id_user")->fetch_assoc();
 $nama_user = $user['nama'] ?? 'Unknown';
 
-// Buat spreadsheet baru
-$spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
+// Nama file
+$filename = "absensi_user_{$id_user}.xls";
 
-// Header kolom
-$sheet->fromArray([
-    "id_user","nama","tanggal","jam_masuk","jam_pulang","scan_masuk","scan_keluar",
-    "terlambat","pulang_cepat","lembur","jml_hadir","pengecualian"
-], NULL, 'A1');
+// Header supaya browser mendownload
+header("Content-Type: application/vnd.ms-excel");
+header("Content-Disposition: attachment; filename=\"$filename\"");
+
+echo '<table border="1" cellpadding="5" cellspacing="0">';
+echo '<tr">';
+echo "<th style='background-color: #E99724; color:white;'>Id User</th>";
+echo "<th style='background-color: #E99724; color:white;'>Nama</th>";
+echo "<th style='background-color: #E99724; color:white;'>Tanggal</th>";
+echo "<th style='background-color: #E99724; color:white;'>Jam Masuk</th>";
+echo "<th style='background-color: #E99724; color:white;'>Jam Pulang</th>";
+echo "<th style='background-color: #E99724; color:white;'>Scan Masuk</th>";
+echo "<th style='background-color: #E99724; color:white;'>Scan Keluar</th>";
+echo "<th style='background-color: #E99724; color:white;'>Terlambat</th>";
+echo "<th style='background-color: #E99724; color:white;'>Pulang Cepat</th>";
+echo "<th style='background-color: #E99724; color:white;'>Lembur</th>";
+echo "<th style='background-color: #E99724; color:white;'>Jumlah Hadir</th>";
+echo "<th style='background-color: #E99724; color:white;'>Pengecualian</th>";
+echo '</tr>';
 
 // Ambil data absensi
 $stmt = $conn->prepare("
@@ -37,28 +45,23 @@ $stmt->bind_param("i", $id_user);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Mulai dari baris 2
-$rowIndex = 2;
+// Tulis data
 while ($row = $result->fetch_assoc()) {
-    $sheet->setCellValue("A$rowIndex", $row['id_user']);
-    $sheet->setCellValue("B$rowIndex", $nama_user);
-    $sheet->setCellValue("C$rowIndex", $row['tanggal']);
-    $sheet->setCellValue("D$rowIndex", $row['jam_masuk']);
-    $sheet->setCellValue("E$rowIndex", $row['jam_pulang']);
-    $sheet->setCellValue("F$rowIndex", $row['scan_masuk']);
-    $sheet->setCellValue("G$rowIndex", $row['scan_keluar']);
-    $sheet->setCellValue("H$rowIndex", $row['terlambat']);
-    $sheet->setCellValue("I$rowIndex", $row['pulang_cepat']);
-    $sheet->setCellValue("J$rowIndex", $row['lembur']);
-    $sheet->setCellValue("K$rowIndex", $row['jml_hadir']);
-    $sheet->setCellValue("L$rowIndex", $row['pengecualian']);
-    $rowIndex++;
+    echo '<tr>';
+    echo "<td>{$row['id_user']}</td>";
+    echo "<td>{$nama_user}</td>";
+    echo "<td>{$row['tanggal']}</td>";
+    echo "<td>{$row['jam_masuk']}</td>";
+    echo "<td>{$row['jam_pulang']}</td>";
+    echo "<td>{$row['scan_masuk']}</td>";
+    echo "<td>{$row['scan_keluar']}</td>";
+    echo "<td>{$row['terlambat']}</td>";
+    echo "<td>{$row['pulang_cepat']}</td>";
+    echo "<td>{$row['lembur']}</td>";
+    echo "<td>{$row['jml_hadir']}</td>";
+    echo "<td>{$row['pengecualian']}</td>";
+    echo '</tr>';
 }
 
-// Set header supaya bisa download
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header("Content-Disposition: attachment; filename=absensi_user_{$id_user}.xlsx");
-
-$writer = new Xlsx($spreadsheet);
-$writer->save("php://output");
+echo '</table>';
 exit;

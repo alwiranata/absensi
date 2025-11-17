@@ -39,7 +39,7 @@ $data = $conn->query("SELECT * FROM users ORDER BY id_user ASC");
 
 
 <a href="dashboard.php?page=add_user"
-    class="px-4 py-2 bg-[#E99724] text-white rounded mb-4 inline-block">+ Tambah User
+    class="px-4 py-2 bg-[#E99724] text-white rounded-full mb-4 inline-block">+ Tambah User
 </a>
 
 

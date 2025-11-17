@@ -18,7 +18,7 @@ if (!$data) {
 ?>
 
 <h1 class="text-2xl font-semibold mb-5">
-    Edit Absensi 
+    Edit Absensi • ID <?= $id_absensi ?>
 </h1>
 
 <form method="POST" action="pages/absensi/update_absen.php">

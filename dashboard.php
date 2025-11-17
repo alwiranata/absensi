@@ -25,6 +25,7 @@ include 'includes/sidebar.php';
         'absensi',
         'profile',
         'detail',
+        'rekap',
         'add',
         'add_user',
         'edit_user',

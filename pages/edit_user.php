@@ -38,7 +38,7 @@ if (!$data) {
     <div class="mb-4">
         <label>Username</label>
         <input type="text" name="username" value="<?= $data['username'] ?>"
-            class="border p-2 w-full rounded" required>
+            class="border p-2 w-full rounded">
     </div>
 
     <div class="mb-4">
@@ -54,7 +54,7 @@ if (!$data) {
         </select>
     </div>
 
-    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">
+    <button type="submit" class="px-4 py-2 bg-[#E99724] text-white rounded">
         Simpan
     </button>
 

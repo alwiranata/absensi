@@ -16,20 +16,19 @@
 
     <div class="mb-4">
         <label>Username</label>
-        <input type="text" name="username" class="border p-2 w-full rounded" required>
+        <input type="text" name="username" class="border p-2 w-full rounded" >
     </div>
 
     <div class="mb-4">
         <label>Password</label>
-        <input type="password" name="password" class="border p-2 w-full rounded" required>
+        <input type="password" name="password" class="border p-2 w-full rounded" >
     </div>
 
     <div class="mb-4">
         <label>Role</label>
         <select name="role" class="border p-2 w-full rounded" required>
-            <option value="">-- Pilih Role --</option>
-            <option value="admin">Admin</option>
             <option value="user">User</option>
+            <option value="admin">Admin</option>
         </select>
     </div>
 
@@ -37,7 +36,7 @@
         Tambah
     </button>
 
-    <a href="dashboard.php?page=users" class="px-4 py-2 bg-gray-400 rounded">
+    <a href="dashboard.php?page=profile" class="px-4 py-2 bg-gray-400 rounded">
         Batal
     </a>
 
